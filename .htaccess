@@ -1,0 +1,13 @@
+RewriteEngine on
+RewriteRule ^api/authors/?$ api/authors\.php [L]
+RewriteRule ^api/authors/(.+)/books/?$ api/books\.php?author=$1 [L]
+RewriteRule ^api/authors/(.+)/series/?$ api/series\.php?author=$1 [L]
+RewriteRule ^api/authors/(.+)$ api/authors\.php?id=$1 [L]
+
+RewriteRule ^api/series/?$ api/series\.php [L]
+RewriteRule ^api/series/(.+)/books/?$ api/books\.php?series=$1 [L]
+RewriteRule ^api/series/(.+)$ api/series.php?id=$1
+
+RewriteRule ^api/books/?$ api/books\.php [L]
+RewriteRule ^api/books/(.+)$ api/books\.php?id=$1 [L]
+
