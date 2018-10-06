@@ -81,6 +81,24 @@ if ($access) {
             }
         case 'POST':
             {
+                $headers = apache_request_headers();
+                if (! isset($headers['Authorization'])) {
+                    http_response_code(403);
+                    die();
+                } else {
+                    include "jwt.php";
+                    $tok = TokenEngine::readToken($headers['Authorization']);
+                    if (!$tok) {
+                        http_response_code(403);
+                        die;
+                    } else {
+                        if (!isset($tok->user) || !isset($tok->expires) || strtotime($tok->expires) < time()){
+                            http_response_code(403);
+                            
+                            die;
+                        }
+                    }
+                }
                 if (! isset($_POST['name'])) {
                     http_response_code(400);
                     die();
@@ -113,6 +131,24 @@ if ($access) {
             }
         case 'PUT':
             {
+                $headers = apache_request_headers();
+                if (! isset($headers['Authorization'])) {
+                    http_response_code(403);
+                    die();
+                } else {
+                    include "jwt.php";
+                    $tok = TokenEngine::readToken($headers['Authorization']);
+                    if (!$tok) {
+                        http_response_code(403);
+                        die;
+                    } else {
+                        if (!isset($tok->user) || !isset($tok->expires) || strtotime($tok->expires) < time()){
+                            http_response_code(403);
+                            
+                            die;
+                        }
+                    }
+                }
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
                     if (! filter_var($id, FILTER_VALIDATE_INT)) {
@@ -164,6 +200,24 @@ if ($access) {
 
         case 'DELETE':
             {
+                $headers = apache_request_headers();
+                if (! isset($headers['Authorization'])) {
+                    http_response_code(403);
+                    die();
+                } else {
+                    include "jwt.php";
+                    $tok = TokenEngine::readToken($headers['Authorization']);
+                    if (!$tok) {
+                        http_response_code(403);
+                        die;
+                    } else {
+                        if (!isset($tok->user) || !isset($tok->expires) || strtotime($tok->expires) < time()){
+                            http_response_code(403);
+                            
+                            die;
+                        }
+                    }
+                }
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
                     if (filter_var($id, FILTER_VALIDATE_INT)) {

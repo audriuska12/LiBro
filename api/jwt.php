@@ -25,11 +25,14 @@ class TokenEngine
         $parts = explode(".", $tok);
         if (count($parts) != 3) {
             return false;
-        }
-        else {
-            $decoded = ["head"=>base64_decode($parts[0]), "body"=>base64_decode($parts[1]), "signature"=>base64_decode($parts[2])];
+        } else {
+            $decoded = [
+                "head" => base64_decode($parts[0]),
+                "body" => base64_decode($parts[1]),
+                "signature" => base64_decode($parts[2])
+            ];
             $expected = hash_hmac('sha256', $parts[0] . "." . $parts[1], self::$secret);
-            if(hash_equals($decoded["signature"], $expected)){
+            if (hash_equals($decoded["signature"], $expected)) {
                 return json_decode($decoded["body"]);
             } else {
                 return false;

@@ -11,3 +11,4 @@ RewriteRule ^api/series/(.+)$ api/series.php?id=$1
 RewriteRule ^api/books/?$ api/books\.php [L]
 RewriteRule ^api/books/(.+)$ api/books\.php?id=$1 [L]
 
+RewriteRule ^api/auth/?$ api/auth.php [L]
