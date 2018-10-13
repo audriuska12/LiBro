@@ -1,10 +1,16 @@
-<?php
-include "api/jwt.php";
-$ch = curl_init();
-$admin = "admin";
-$options = [CURLOPT_URL=>"localhost/LiBro/api/auth.php", CURLOPT_RETURNTRANSFER=>true, CURLOPT_POST=>1, CURLOPT_POSTFIELDS=>http_build_query(["username"=>$admin, "password"=>$admin])];
-curl_setopt_array($ch, $options);
-$rez = curl_exec($ch);
-curl_close($ch);
-echo $rez;
-?>
+<?php session_start()?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="styles.css">
+<title>LiBro</title>
+</head>
+<body>
+    <div id="container"></div>
+    <?php include "pages/header.php";?>
+
+<div id="body">Welcome to LiBro!</div>
+<div id="footer">LiBro Main Page</div>
+</body>
+</html>

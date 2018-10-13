@@ -1,0 +1,74 @@
+@charset "UTF-8";
+*{
+    font-family: 'Amatic SC', cursive, Verdana, sans-serif;
+}
+body{
+    margin:0;
+    padding:0;
+    height:100%;
+    background-color:lightgrey;
+}
+button, input[type=submit]{
+    background-color:darkslategrey;
+    color:lightgrey;
+    font-size:1em;
+    padding:0.1em;
+    border-radius:6px;
+    border:none;
+    transition-duration:0.5s;
+}
+button, input[type=submit]:hover{
+    background-color:darkgrey;
+}
+#container {
+    min-height: 100%;
+    height:100%;
+    position:relative;
+}
+#header{
+    padding:10px;
+    height:75px;
+    background-image: url("images/header.png");
+    color:#e5fcf5;
+}
+#LoginButton{
+    background-color:darkslategrey;
+    color:lightgrey;
+    font-size:1.5em;
+    padding:0.25em;
+    border-radius:12px;
+    border:none;
+    transition-duration:0.5s;
+}
+#LoginButton:hover{
+    background-color:darkgrey;
+}
+#LoginBox{
+    z-index:1;
+    display: none;
+    background-color:darkslategrey;
+    border-radius:12px;
+    padding:12px;
+}
+#LoginFrame{
+    background-color:darkslategrey;
+    border-radius:12px;
+}
+
+#LoginContainer{
+    background-color:darkslategrey;
+    border-radius:12px;
+}
+#body{
+    padding:10px;
+    padding-bottom:60px;
+    background-color:lightgrey;
+}
+#footer{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:60px;
+    background-image:url("images/footer.png");
+    color:#e5fcf5
+}
