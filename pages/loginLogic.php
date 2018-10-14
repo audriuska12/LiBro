@@ -19,6 +19,7 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
     if(curl_getinfo($ch, CURLINFO_RESPONSE_CODE) == 200){
         $_SESSION["token"]=$resp;
         http_response_code(200);
+        echo $resp;
     } else {
         http_response_code(403);
         die;

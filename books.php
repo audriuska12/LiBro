@@ -10,6 +10,9 @@
     <div id="container">
         <?php include "pages/header.php";?>
         <div id="content">
+        <?php if(isset($_SESSION["token"])){
+            include "pages/newBook.php";
+        }?>
         	<div id="bookList">
         		
         	</div>
@@ -22,20 +25,26 @@
 
 	function getBookHTML(book, reznum){
 		var title = book.title;
-		var desc = book.description; 
-		return "<div>" + title + "</br>" + desc + "</div></br>";
+		var desc = book.description;
+		var author = (book.authorName != null) ? book.authorName : "N\\A";
+		var series = (book.seriesName != null) ? book.seriesName : "N\\A";
+		return "<div>" + title + "</br>Author: " + author + "</br>Series: " + series + "</br>" + desc + "</br></div>";
 	}
 
 	function getLongBookEntryHTML(book, reznum){
 		var title = book.title;
-		var desc = book.description + "<a class=\"collapser\" onclick=\"collapseDesc(" + reznum + ")\"> Show less</a>"; 
-		return "<div id=\"bookInfo" + reznum + "\">" + title + "</br>" + desc + "</br></div>";
+		var desc = book.description + "<a class=\"collapser\" onclick=\"collapseDesc(" + reznum + ")\"> Show less</a>";
+		var author = (book.authorName != null) ? book.authorName : "N\\A";
+		var series = (book.seriesName != null) ? book.seriesName : "N\\A";
+		return "<div id=\"bookInfo" + reznum + "\">" + title + "</br>Author: " + author + "</br>Series: " + series + "</br>" + desc + "</br></div>";
 	}
     
 	function getShortBookEntryHTML(book, reznum){
 		var title = book.title;
-		var desc = (book.description.length <= 200) ? book.description : (book.description.substring(0,197) + "... <a class=\"expander\" onclick=\"expandDesc(" + reznum + ")\"> Show more</a>"); 
-		return "<div id=\"bookInfo" + reznum + "\">" + title + "</br>" + desc + "</br></div>";
+		var desc = (book.description.length <= 200) ? book.description : (book.description.substring(0,197) + "... <a class=\"expander\" onclick=\"expandDesc(" + reznum + ")\"> Show more</a>");
+		var author = (book.authorName != null) ? book.authorName : "N\\A";
+		var series = (book.seriesName != null) ? book.seriesName : "N\\A";
+		return "<div id=\"bookInfo" + reznum + "\">" + title + "</br>Author: " + author + "</br>Series: " + series + "</br>" + desc + "</br></div>";
 	}
 
 	function expandDesc(id){
@@ -59,7 +68,7 @@
 					}
 				} else {
 					bookList = [rez];
-					lst.innerHTML += getBookHtml(rez, 0);
+					lst.innerHTML += getBookHTML(rez, 0);
 				}
 			} else {
 				return false;

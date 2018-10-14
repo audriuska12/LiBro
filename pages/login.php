@@ -1,5 +1,5 @@
 <div id="LoginDiv">
-	<button id="LoginButton"onclick="toggleView()">Administrator login</button>
+	<button id="LoginButton"onclick="toggleLoginView()">Administrator login</button>
 	<div id="LoginBox" style="display:none">
 		<div id="LoginFrame">
 			<div id="LoginContainer">
@@ -8,7 +8,7 @@
 				<div><input id="username" type="text"/></div>
 				<div>Password:</div>
 				<div><input id="password" type="password"/></div>
-				<div><input type="button" value="Login" style="float:right;margin:6px" onclick="submitLogin()"></div>
+				<div><input id="LoginSubmit" type="button" value="Login" onclick="submitLogin()"></div>
 			</form>
 			</div>
 		</div>
@@ -20,7 +20,7 @@
 		if(!document.getElementById("LoginDiv").contains(e.target)){
 			var l = document.getElementById("LoginBox");
 			if (l.style.display != "none"){
-					toggleView();
+					toggleLoginView();
 				}
 			}
 		});
@@ -31,7 +31,7 @@
 		}
 	}
 	
-	function toggleView(){
+	function toggleLoginView(){
 		var l = document.getElementById("LoginBox");
 		if(l.style.display=="none"){
 			l.style.display="block";
@@ -43,12 +43,14 @@
 	}
 
 	function submitLogin(){
+		console.log("Submitting login");
 		var username = document.getElementById("username").value;
 		var password = document.getElementById("password").value;
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function(){
 			if(this.readyState == 4){
 				if(this.status == 200){
+					window.localStorage.setItem("AuthToken", this.responseText);
 					location.reload(true);
 				} else {
 					alert("Login failed. Make sure username and password are correct, or try again later.");

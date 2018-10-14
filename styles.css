@@ -43,6 +43,23 @@ body{
     color:#e5fcf5
 }
 
+#HomeDiv{
+    float:left;
+    font-size:3em;
+    flex:0.2;
+}
+
+#NavDiv{
+    flex:0.6;
+    margin-top:1em;
+}
+
+#UserDiv{
+    float:right;
+    margin-top:1em;
+    flex:0.2;
+}
+
 #LoginDiv{
     display:flex;
     flex-direction:column;
@@ -80,29 +97,36 @@ body{
     overflow:auto;
 }
 
+#LogoutButton{
+    float:right;
+    background-color:darkslategrey;
+}
+
+#LogoutButton:hover{
+    background-color:grey;
+}
+
 #LoginContainer{
     background-color:darkslategrey;
     border-radius:12px;
     overflow:auto;
 }
 
-#HomeDiv{
-    float:left;
-    font-size:3em;
-    flex:0.2;
-}
-
-#NavDiv{
-    flex:0.6;
-    margin-top:1em;
-}
-
-#UserDiv{
+#LoginSubmit{
     float:right;
-    margin-top:1em;
-    flex:0.2;
+    margin:6px
 }
 
+#NewBookButton{
+    background-color:darkslategrey;
+}
+
+#CreateBookDiv{
+    background-color:darkslategrey;
+    display:inline-block;
+    border-radius:6px;
+    padding:6px;
+}
 button, input[type=submit], input[type=button]{
     background-color:grey;
     color:lightgrey;
