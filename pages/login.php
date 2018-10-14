@@ -8,7 +8,7 @@
 				<input id="username" type="text"/></br>
 				Password:</br>
 				<input id="password" type="password"/></br>
-				<input type="button" value="Login" style="float:right" onclick="submitLogin()">
+				<input type="button" value="Login" style="float:right;margin:6px" onclick="submitLogin()">
 			</form>
 			</div>
 		</div>
@@ -21,13 +21,21 @@
 			toggleView();
 			}
 		});
+
+	function enterPress(e){
+		if (e.keyCode == 13){
+			submitLogin();
+		}
+	}
 	
 	function toggleView(){
 		var l = document.getElementById("LoginBox");
 		if(l.style.display=="none"){
 			l.style.display="block";
+			document.addEventListener("keypress", enterPress);
 		} else {
 			l.style.display="none";
+			document.removeEventListener("keypress", enterPress);
 		}	
 	}
 
@@ -36,12 +44,11 @@
 		var password = document.getElementById("password").value;
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function(){
-			console.log(this);
 			if(this.readyState == 4){
 				if(this.status == 200){
-					alert("Response" + this.responseText);
-					return false;
+					location.reload(true);
 				} else {
+					alert("Login failed. Make sure username and password are correct, or try again later.");
 					return false;
 				}
 			}

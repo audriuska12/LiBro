@@ -8,8 +8,8 @@ body{
     height:100%;
     background-color:lightgrey;
 }
-button, input[type=submit]{
-    background-color:darkslategrey;
+button, input[type=submit], input[type=button]{
+    background-color:darkgrey;
     color:lightgrey;
     font-size:1em;
     padding:0.1em;
@@ -17,8 +17,8 @@ button, input[type=submit]{
     border:none;
     transition-duration:0.5s;
 }
-button, input[type=submit]:hover{
-    background-color:darkgrey;
+button, input[type=submit], input[type=button]:hover{
+    background-color:grey;
 }
 #container {
     min-height: 100%;
@@ -49,15 +49,18 @@ button, input[type=submit]:hover{
     background-color:darkslategrey;
     border-radius:12px;
     padding:12px;
+    overflow:auto;
 }
 #LoginFrame{
     background-color:darkslategrey;
     border-radius:12px;
+    overflow:auto;
 }
 
 #LoginContainer{
     background-color:darkslategrey;
     border-radius:12px;
+    overflow:auto;
 }
 #body{
     padding:10px;

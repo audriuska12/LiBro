@@ -1,1 +1,1 @@
-<div id="header"><div style="float:left;font-size:3em">LiBro</div><div style="float:right"><?php if(!isset($_SESSION["token"])){include "login.php";} else echo $_SESSION["token"]?></div></div>
+<div id="header"><div style="float:left;font-size:3em">LiBro</div><div style="float:right"><?php if(!isset($_SESSION["token"])){include "login.php";} else include "logout.php"?></div></div>
