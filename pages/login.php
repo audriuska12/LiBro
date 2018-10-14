@@ -1,14 +1,14 @@
-<div id="LoginDiv" class="container">
+<div id="LoginDiv">
 	<button id="LoginButton"onclick="toggleView()">Administrator login</button>
 	<div id="LoginBox" style="display:none">
 		<div id="LoginFrame">
 			<div id="LoginContainer">
 			<form>
-				Username:</br>
-				<input id="username" type="text"/></br>
-				Password:</br>
-				<input id="password" type="password"/></br>
-				<input type="button" value="Login" style="float:right;margin:6px" onclick="submitLogin()">
+				<div>Username:</div>
+				<div><input id="username" type="text"/></div>
+				<div>Password:</div>
+				<div><input id="password" type="password"/></div>
+				<div><input type="button" value="Login" style="float:right;margin:6px" onclick="submitLogin()"></div>
 			</form>
 			</div>
 		</div>
@@ -18,7 +18,10 @@
 
 	window.addEventListener('click', function(e){
 		if(!document.getElementById("LoginDiv").contains(e.target)){
-			toggleView();
+			var l = document.getElementById("LoginBox");
+			if (l.style.display != "none"){
+					toggleView();
+				}
 			}
 		});
 
