@@ -36,10 +36,11 @@
 	function getLongBookEntryHTML(book, reznum){
 		var title = book.title;
 		var id = book.id;
+		var published = book.published;
 		var desc = book.description + "<a class=\"collapser\" onclick=\"collapseDesc(" + reznum + ")\"> Show less</a>";
 		var author = (book.authorName != null) ? book.authorName : "N\\A";
 		var series = (book.seriesName != null) ? book.seriesName : "N\\A";
-		return "<div id=\"bookInfo" + reznum + "\"><a href=\"http://localhost/LiBro/books/" + id + "\>"+ title + "</a></br>Author: " + author + "</br>Series: " + series + "</br>Published: " + published + "</br>" + desc + "</br></div>";
+		return "<div id=\"bookInfo" + reznum + "\"><a href=\"http://localhost/LiBro/books/" + id + "\"\>"+ title + "</a></br>Author: " + author + "</br>Series: " + series + "</br>Published: " + published + "</br>" + desc + "</br></div>";
 	}
     
 	function getShortBookEntryHTML(book, reznum){
@@ -48,7 +49,7 @@
 		var desc = (book.description.length <= 200) ? book.description : (book.description.substring(0,197) + "... <a class=\"expander\" onclick=\"expandDesc(" + reznum + ")\"> Show more</a>");
 		var author = (book.authorName != null) ? book.authorName : "N\\A";
 		var series = (book.seriesName != null) ? book.seriesName : "N\\A";
-		return "<div id=\"bookInfo" + reznum + "\"><a href=\"http://localhost/LiBro/books/" + id + "\">" + title + "</a></br>Author: " + author + "</br>Series: " + series + "</br>" + desc + "</br></div>";
+		return "<div id=\"bookInfo" + reznum + "\"><a href=\"http://localhost/LiBro/books/" + id + "\"\">" + title + "</a></br>Author: " + author + "</br>Series: " + series + "</br>" + desc + "</br></div>";
 	}
 
 	function expandDesc(id){
