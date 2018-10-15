@@ -117,22 +117,6 @@ body{
     margin:6px
 }
 
-#NewBookButton{
-    background-color:darkslategrey;
-}
-
-#NewBookButton:hover{
-    background-color:grey;
-}
-
-#CreateBookDiv{
-    background-color:darkslategrey;
-    display:inline-block;
-    border-radius:6px;
-    padding:6px;
-    margin-bottom:1em;
-}
-
 button, input[type=submit], input[type=button]{
     background-color:grey;
     color:lightgrey;
@@ -172,4 +156,20 @@ a {
 
 .collapser{
     color:grey;
+}
+
+.BookForm{
+    background-color:darkslategrey;
+    display:inline-block;
+    border-radius:6px;
+    padding:6px;
+    margin-bottom:1em;
+}
+
+.BookFormButton{
+    background-color:darkslategrey;
+}
+
+.BookFormButton:hover{
+    background-color:grey;
 }

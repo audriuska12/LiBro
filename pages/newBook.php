@@ -1,17 +1,17 @@
-<div id="CreateBookDiv">
-	<button id="NewBookButton" onclick="ToggleNewBookView()">Create New Book</button>
+<div id="CreateBookDiv" class="BookForm">
+	<button id="NewBookButton" onclick="ToggleNewBookView()" class="BookFormButton">Create New Book</button>
 	<div id="BookDataForm" style="display:none">
 	<form>
 		<div>Title:</div>
 		<div><input id="newBookTitle" type="text"/></div>
-		<div>Description:</div>
-		<div><input id="newBookDescription" type="text"/></div>
-		<div>Published on:</div>
-		<div><input id="newBookPublished" type="date"/></div>
 		<div>Author:</div>
 		<div><select id="newBookAuthor"><option value="0" selected>N/A</option></select></div>
 		<div>Series:</div>
 		<div><select id="newBookSeries"><option value="0" selected>N/A</option></select></div>
+		<div>Published on:</div>
+		<div><input id="newBookPublished" type="date" required/></div>
+		<div>Description:</div>
+		<div><textarea id="newBookDescription" cols="60"></textarea></div>		
 		<div><input id="newBookSubmit" type="button" value="Submit" onclick="submitBook()"/></div>
 	</form>
 	</div>

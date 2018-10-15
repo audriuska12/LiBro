@@ -14,15 +14,15 @@ RewriteRule ^api/books/(.+)$ api/books\.php?id=$1 [L]
 RewriteRule ^api/auth/?$ api/auth.php [L]
 
 RewriteRule ^authors/?$ authors\.php [L]
-RewriteRule ^authors/(.+)/books/?$ books\.php?author=$1 [L]
-RewriteRule ^authors/(.+)/series/?$ series\.php?author=$1 [L]
-RewriteRule ^authors/(.+)$ authors\.php?id=$1 [L]
+RewriteRule ^authors/([0-9]+)/books/?$ books\.php?author=$1 [L]
+RewriteRule ^authors/([0-9]+)/series/?$ series\.php?author=$1 [L]
+RewriteRule ^authors/([0-9]+)$ authors\.php?id=$1 [L]
 
 RewriteRule ^series/?$ series\.php [L]
-RewriteRule ^series/(.+)/books/?$ books\.php?series=$1 [L]
-RewriteRule ^series/(.+)$ series.php?id=$1
+RewriteRule ^series/([0-9]+)/books/?$ books\.php?series=$1 [L]
+RewriteRule ^series/([0-9]+)$ series.php?id=$1
 
 RewriteRule ^books/?$ books\.php [L]
-RewriteRule ^books/(.+)$ books\.php?id=$1 [L]
+RewriteRule ^books/([0-9]+)$ books\.php?id=$1 [L]
 
 RewriteRule ^index/?$ index\.php [L]

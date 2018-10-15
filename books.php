@@ -10,8 +10,12 @@
     <div id="container">
         <?php include "pages/header.php";?>
         <div id="content">
-        <?php if(isset($_SESSION["token"]) && !isset($_GET["id"])){
+        <?php if(isset($_SESSION["token"])){
+            if (isset($_GET["id"])){
+                include "pages/editBook.php";
+            } else {
             include "pages/newBook.php";
+            }
         }?>
         	<div id="bookList">
         		<div id="bookLoadSpinner" class="loader"></div>
