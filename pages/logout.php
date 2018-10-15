@@ -3,12 +3,12 @@
 <script type="text/javascript">
 
 	function updateToken(){
-		var tok = window.localStorage.getItem("AuthToken");
+		var tok = localStorage.getItem("AuthToken");
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function(){
 			if(this.readyState == 4){
 				if(this.status == 200){
-					window.localStorage.setItem("AuthToken", this.responseText);
+					localStorage.setItem("AuthToken", this.responseText);
 				} else {
 					return false;
 				}

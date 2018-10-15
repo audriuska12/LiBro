@@ -110,7 +110,6 @@ if ($access) {
                     } else {
                         if (!isset($tok->user) || !isset($tok->expires) || strtotime($tok->expires) < time()){
                             http_response_code(403);
-                            
                             die;
                         }
                     }

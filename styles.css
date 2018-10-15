@@ -121,12 +121,18 @@ body{
     background-color:darkslategrey;
 }
 
+#NewBookButton:hover{
+    background-color:grey;
+}
+
 #CreateBookDiv{
     background-color:darkslategrey;
     display:inline-block;
     border-radius:6px;
     padding:6px;
+    margin-bottom:1em;
 }
+
 button, input[type=submit], input[type=button]{
     background-color:grey;
     color:lightgrey;
@@ -144,6 +150,20 @@ button, input[type=submit], input[type=button]:hover{
 a {
     color:inherit;
     text-decoration:inherit;
+}
+
+.loader{
+    border: 8px solid grey;
+    border-radius: 50%;
+    border-top: 8px solid lightgrey;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin{
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .expander{

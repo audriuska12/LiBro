@@ -43,14 +43,13 @@
 	}
 
 	function submitLogin(){
-		console.log("Submitting login");
 		var username = document.getElementById("username").value;
 		var password = document.getElementById("password").value;
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function(){
 			if(this.readyState == 4){
 				if(this.status == 200){
-					window.localStorage.setItem("AuthToken", this.responseText);
+					localStorage.setItem("AuthToken", this.responseText);
 					location.reload(true);
 				} else {
 					alert("Login failed. Make sure username and password are correct, or try again later.");
