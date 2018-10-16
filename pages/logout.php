@@ -31,7 +31,7 @@
 				}
 			}
 		}
-		xmlhttp.open("POST", "pages/logoutLogic.php", true);
+		xmlhttp.open("POST", "http://localhost/LiBro/pages/logoutLogic.php", true);
 		xmlhttp.send();
 	}
 

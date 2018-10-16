@@ -139,7 +139,7 @@ body{
     color:grey;
 }
 
-.BookForm{
+.DataForm{
     background-color:darkslategrey;
     display:inline-block;
     border-radius:6px;
@@ -147,11 +147,11 @@ body{
     margin-bottom:1em;
 }
 
-.BookFormButton{
+.DataFormButton{
     background-color:darkslategrey;
 }
 
-.BookFormButton:hover{
+.DataFormButton:hover{
     background-color:grey;
 }
 

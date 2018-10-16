@@ -1,5 +1,5 @@
-<div id="CreateBookDiv" class="BookForm">
-	<button id="NewBookButton" onclick="ToggleNewBookView()" class="BookFormButton">Create New Book</button>
+<div id="CreateBookDiv" class="DataForm">
+	<button id="NewBookButton" onclick="ToggleNewBookView()" class="DataFormButton">Create New Book</button>
 	<div id="BookDataForm" style="display:none">
 	<form>
 		<div>Title:</div>
@@ -110,7 +110,7 @@
 				}
 			}
 		}
-		xmlhttp.open("POST", "http://localhost/LiBro/api/books.php", true);
+		xmlhttp.open("POST", "http://localhost/LiBro/api/books/", true);
 		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xmlhttp.setRequestHeader("Authorization", localStorage.getItem("AuthToken"));
 		xmlhttp.send("title="+title+"&description="+description+"&published="+published + ((author == 0) ? "" : ("&author="+author)) + ((series == 0) ? "" : ("&series="+series)));
