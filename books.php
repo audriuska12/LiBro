@@ -11,11 +11,7 @@
         <?php include "pages/header.php";?>
         <div id="content">
         <?php if(isset($_SESSION["token"])){
-            if (isset($_GET["id"])){
-                include "pages/editBook.php";
-            } else {
-            include "pages/newBook.php";
-            }
+            include "pages/bookAdminOptions.php";
         }?>
         	<div id="bookList">
         		<div id="bookLoadSpinner" class="loader"></div>

@@ -52,12 +52,13 @@
 					localStorage.setItem("AuthToken", this.responseText);
 					location.reload(true);
 				} else {
+					console.log(this);
 					alert("Login failed. Make sure username and password are correct, or try again later.");
 					return false;
 				}
 			}
 		}
-		xmlhttp.open("POST", "pages/loginLogic.php", true);
+		xmlhttp.open("POST", "http://localhost/LiBro/pages/loginLogic.php", true);
 		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xmlhttp.send("username="+username+"&password="+password);
 	}

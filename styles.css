@@ -117,25 +117,6 @@ body{
     margin:6px
 }
 
-button, input[type=submit], input[type=button]{
-    background-color:grey;
-    color:lightgrey;
-    font-size:1em;
-    padding:0.1em;
-    border-radius:6px;
-    border:none;
-    transition-duration:0.5s;
-}
-
-button, input[type=submit], input[type=button]:hover{
-    background-color:darkgrey;
-}
-
-a {
-    color:inherit;
-    text-decoration:inherit;
-}
-
 .loader{
     border: 8px solid grey;
     border-radius: 50%;
@@ -172,4 +153,37 @@ a {
 
 .BookFormButton:hover{
     background-color:grey;
+}
+
+.deleteButton{
+    background-color:darkred;
+    color:lightgrey;
+    font-size:1em;
+    padding:0.1em;
+    border-radius:6px;
+    border:none;
+    transition-duration:0.5s;
+}
+
+.deleteButton:hover{
+    background-color:red;
+}
+
+button, input[type=submit], input[type=button]{
+    background-color:grey;
+    color:lightgrey;
+    font-size:1em;
+    padding:0.1em;
+    border-radius:6px;
+    border:none;
+    transition-duration:0.5s;
+}
+
+button, input[type=submit], input[type=button]:hover{
+    background-color:darkgrey;
+}
+
+a {
+    color:inherit;
+    text-decoration:inherit;
 }

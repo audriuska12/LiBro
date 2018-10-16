@@ -24,6 +24,7 @@
 		xmlhttp.onreadystatechange = function(){
 			if(this.readyState == 4){
 				if(this.status == 200){
+					localStorage.removeItem("AuthToken");
 					location.reload(true);
 				} else {
 					return false;
