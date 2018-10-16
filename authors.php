@@ -27,21 +27,21 @@
 		var name = author.name;
 		var id = author.id;
 		var bio = (author.bio) ? author.bio : "";
-		return "<div>" + name + ((bio != "") ? ("</br>Biography: " + bio) : "") + "</br><a href=\"http://localhost/LiBro/authors/" + id + "/books\">Books</a></div>";
+		return "<div>" + name + ((bio != "") ? ("</br>Biography: " + bio) : "") + "</br><a href=\"http://localhost/LiBro/authors/" + id + "/books\">Books</a></br><a href=\"http://localhost/LiBro/authors/" + id + "/series\">Series</a></div>";
 	}
 
 	function getLongAuthorEntryHTML(author, reznum){
 		var name = author.name;
 		var id = author.id;
 		var bio = (author.bio) ? (author.bio + "<a class=\"collapser\" onclick=\"collapseDesc(" + reznum + ")\"> Show less</a>") : "";
-		return "<div id=\"authorInfo" + reznum + "\"><a href=\"http://localhost/LiBro/authors/" + id +"\">" + name + "</a>" + ((bio != "") ? ("</br>Biography: " + bio) : "") + "</br><a href=\"http://localhost/LiBro/authors/" + id + "/books\">Books</a></div>";
+		return "<div id=\"authorInfo" + reznum + "\"><a href=\"http://localhost/LiBro/authors/" + id +"\">" + name + "</a>" + ((bio != "") ? ("</br>Biography: " + bio) : "") + "</br><a href=\"http://localhost/LiBro/authors/" + id + "/books\">Books</a></br><a href=\"http://localhost/LiBro/authors/" + id + "/series\">Series</a></div>";
 	}
     
 	function getShortAuthorEntryHTML(author, reznum){
 		var name = author.name;
 		var id = author.id;
 		var bio = (author.bio) ? ((author.bio.length <= 200)? author.bio : (author.bio.substring(0,197) + "... <a class=\"expander\" onclick=\"expandDesc(" + reznum + ")\"> Show more</a>")) : "";
-		return "<div id=\"authorInfo" + reznum + "\"><a href=\"http://localhost/LiBro/authors/" + id +"\">" + name + "</a>" + ((bio != "") ? ("</br>Biography: " + bio) : "") + "</br><a href=\"http://localhost/LiBro/authors/" + id + "/books\">Books</a></div>";
+		return "<div id=\"authorInfo" + reznum + "\"><a href=\"http://localhost/LiBro/authors/" + id +"\">" + name + "</a>" + ((bio != "") ? ("</br>Biography: " + bio) : "") + "</br><a href=\"http://localhost/LiBro/authors/" + id + "/books\">Books</a></br><a href=\"http://localhost/LiBro/authors/" + id + "/series\">Series</a></div>";
 	}
 
 	function expandDesc(id){

@@ -11,7 +11,6 @@
     				if(this.status == 200){
     					location.href = "http://localhost/LiBro/authors/";
     				} else {
-        				console.log
     					alert("Author could not be deleted.");
     					return false;
     				}

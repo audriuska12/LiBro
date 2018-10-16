@@ -1,5 +1,5 @@
-<div id="EditBookDiv" class="BookForm">
-	<button id="EditBookButton" onclick="ToggleEditBookView()" class="BookFormButton">Edit Book</button>
+<div id="EditBookDiv" class="DataForm">
+	<button id="EditBookButton" onclick="ToggleEditBookView()" class="DataFormButton">Edit Book</button>
 	<div id="BookDataForm" style="display:none">
 	<form>
 		<div>Title:</div>
