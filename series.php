@@ -4,14 +4,14 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="http://localhost/LiBro/styles.css">
-<title>LiBro</title>
+<title>Series</title>
 </head>
 <body>
     <div id="container">
         <?php include "pages/header.php";?>
         <div id="content">
         <?php if(isset($_SESSION["token"])){
-            include "pages/seriesAdminOptions.php";
+            include "pages/series/seriesAdminOptions.php";
         }?>
         	<div id="seriesList">
         		<div id="seriesLoadSpinner" class="loader"></div>
@@ -72,6 +72,7 @@
 						seriesList = [rez];
 						document.getElementById("seriesLoadSpinner").style.display="none";
 						lst.innerHTML += getSeriesHTML(rez);
+						document.title = rez.name;
 					}
 				} else if (this.status == 404){
 					document.getElementById("content").innerHTML = "Series not found!";

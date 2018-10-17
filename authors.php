@@ -4,14 +4,14 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="http://localhost/LiBro/styles.css">
-<title>LiBro</title>
+<title>Authors</title>
 </head>
 <body>
     <div id="container">
         <?php include "pages/header.php";?>
         <div id="content">
         <?php if(isset($_SESSION["token"])){
-            include "pages/authorAdminOptions.php";
+            include "pages/authors/authorAdminOptions.php";
         }?>
         	<div id="authorList">
         		<div id="authorLoadSpinner" class="loader"></div>
@@ -69,6 +69,7 @@
 						authorList = [rez];
 						document.getElementById("authorLoadSpinner").style.display="none";
 						lst.innerHTML += getAuthorHTML(rez, 0);
+						document.title = rez.name;
 					}
 				} else {
 					return false;

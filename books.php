@@ -11,7 +11,7 @@
         <?php include "pages/header.php";?>
         <div id="content">
         <?php if(isset($_SESSION["token"])){
-            include "pages/bookAdminOptions.php";
+            include "pages/books/bookAdminOptions.php";
         }?>
         	<div id="bookList">
         		<div id="bookLoadSpinner" class="loader"></div>
@@ -23,40 +23,118 @@
 
 	var bookList;
 
-	function getBookHTML(book){
-		var title = book.title;
-		var published = book.published;
-		var desc = book.description;
-		var author = (book.authorName != null) ? book.authorName : "N\\A";
-		var series = (book.seriesName != null) ? book.seriesName : "N\\A";
-		return "<div>" + title + "</br>" + ((book.authorID != null) ? ("<a href=\"http://localhost/LiBro/authors/" + book.authorID + "\">") : "") + "Author: " + author + "</a></br>Series: " + series + "</br>Published: " + published + "</br>" + desc + "</br></div>";
+	function getBookNode(book){
+		console.log(book);
+		var container = document.createElement("div");
+		container.className = "SingleEntryContainer";
+		var imgDiv = document.createElement("img");
+		imgDiv.className = "SingleEntryImage";
+		imgDiv.src = "http://localhost/LiBro/images/cover-placeholder.gif";
+		container.appendChild(imgDiv);
+		var bookDiv = document.createElement("div");
+		bookDiv.className = "SingleEntryData";
+		var titleDiv = document.createTextNode(book.title);
+		bookDiv.appendChild(titleDiv);
+		var breakDiv = document.createElement("br");
+		bookDiv.appendChild(breakDiv);
+		var authorDiv = document.createElement("a");
+		authorDiv.text = "Author: " + ((book.authorName != null) ? book.authorName : "N\\A");
+		if (book.authorID != null) authorDiv.href = "http://localhost/LiBro/authors/" + book.authorID;
+		bookDiv.appendChild(authorDiv);
+		breakDiv = document.createElement("br");
+		bookDiv.appendChild(breakDiv);
+		var seriesDiv = document.createElement("a");
+		seriesDiv.text = "Series: " + ((book.seriesName != null) ? book.seriesName : "N\\A");
+		if(book.seriesID != null) seriesDiv.href = "http://localhost/LiBro/series/" + book.seriesID;
+		bookDiv.appendChild(seriesDiv);
+		breakDiv = document.createElement("br");
+		bookDiv.appendChild(breakDiv);
+		var publishedDiv = document.createTextNode(book.published);
+		bookDiv.appendChild(publishedDiv);
+		breakDiv = document.createElement("br");
+		bookDiv.appendChild(breakDiv);
+		var descDiv = document.createTextNode(book.description);
+		bookDiv.appendChild(descDiv);
+		container.appendChild(bookDiv);
+		return container;
 	}
 
-	function getLongBookEntryHTML(book, reznum){
-		var title = book.title;
-		var id = book.id;
-		var published = book.published;
-		var desc = book.description + "<a class=\"collapser\" onclick=\"collapseDesc(" + reznum + ")\"> Show less</a>";
-		var author = (book.authorName != null) ? book.authorName : "N\\A";
-		var series = (book.seriesName != null) ? book.seriesName : "N\\A";
-		return "<div id=\"bookInfo" + reznum + "\"><a href=\"http://localhost/LiBro/books/" + id + "\"\>"+ title + "</a></br>" + ((book.authorID != null) ? ("<a href=\"http://localhost/LiBro/authors/" + book.authorID + "\">") : "") + "Author: " + author + "</a></br>Series: " + series + "</br>Published: " + published + "</br>" + desc + "</br></div>";
+	function getLongBookEntryNode(book, reznum){
+		var bookDiv = document.createElement("p");
+		bookDiv.id = "bookInfo" + reznum;
+		var titleDiv = document.createElement("a");
+		titleDiv.href = "http://localhost/LiBro/books/" + book.id;
+		titleDiv.text = book.title;
+		bookDiv.appendChild(titleDiv);
+		var breakDiv = document.createElement("br");
+		bookDiv.appendChild(breakDiv);
+		var authorDiv = document.createElement("a");
+		authorDiv.text = "Author: " + ((book.authorName != null) ? book.authorName : "N\\A");
+		if (book.authorID != null) authorDiv.href = "http://localhost/LiBro/authors/" + book.authorID;
+		bookDiv.appendChild(authorDiv);
+		breakDiv = document.createElement("br");
+		bookDiv.appendChild(breakDiv);
+		var seriesDiv = document.createElement("a");
+		seriesDiv.text = "Series: " + ((book.seriesName != null) ? book.seriesName : "N\\A");
+		if(book.seriesID != null) seriesDiv.href = "http://localhost/LiBro/series/" + book.seriesID;
+		bookDiv.appendChild(seriesDiv);
+		breakDiv = document.createElement("br");
+		bookDiv.appendChild(breakDiv);
+		var publishedDiv = document.createTextNode("Published: " + book.published);
+		bookDiv.appendChild(publishedDiv);
+		breakDiv = document.createElement("br");
+		bookDiv.appendChild(breakDiv);
+		var descDiv = document.createTextNode(book.description);
+		bookDiv.appendChild(descDiv);
+		if (book.description.length > 200){
+			var collapserDiv = document.createElement("a");
+			collapserDiv.className = "collapser";
+			collapserDiv.addEventListener("click", function(){collapseDesc(reznum)});
+			collapserDiv.text = " Show less";
+			bookDiv.appendChild(collapserDiv);
+		}
+		return bookDiv;
 	}
     
-	function getShortBookEntryHTML(book, reznum){
-		var title = book.title;
-		var id = book.id;
-		var desc = (book.description.length <= 200) ? book.description : (book.description.substring(0,197) + "... <a class=\"expander\" onclick=\"expandDesc(" + reznum + ")\"> Show more</a>");
-		var author = (book.authorName != null) ? book.authorName : "N\\A";
-		var series = (book.seriesName != null) ? book.seriesName : "N\\A";
-		return "<div id=\"bookInfo" + reznum + "\"><a href=\"http://localhost/LiBro/books/" + id + "\"\">" + title + "</a></br>" + ((book.authorID != null) ? ("<a href=\"http://localhost/LiBro/authors/" + book.authorID + "\">") : "") + "Author: " + author + "</a></br>Series: " + series + "</br>" + desc + "</br></div>";
+	function getShortBookEntryNode(book, reznum){
+		var bookDiv = document.createElement("p");
+		bookDiv.id = "bookInfo" + reznum;
+		var titleDiv = document.createElement("a");
+		titleDiv.href = "http://localhost/LiBro/books/" + book.id;
+		titleDiv.text = book.title;
+		bookDiv.appendChild(titleDiv);
+		var breakDiv = document.createElement("br");
+		bookDiv.appendChild(breakDiv);
+		var authorDiv = document.createElement("a");
+		authorDiv.text = "Author: " + ((book.authorName != null) ? book.authorName : "N\\A");
+		if (book.authorID != null) authorDiv.href = "http://localhost/LiBro/authors/" + book.authorID;
+		bookDiv.appendChild(authorDiv);
+		breakDiv = document.createElement("br");
+		bookDiv.appendChild(breakDiv);
+		var seriesDiv = document.createElement("a");
+		seriesDiv.text = "Series: " + ((book.seriesName != null) ? book.seriesName : "N\\A");
+		if(book.seriesID != null) seriesDiv.href = "http://localhost/LiBro/series/" + book.seriesID;
+		bookDiv.appendChild(seriesDiv);
+		breakDiv = document.createElement("br");
+		bookDiv.appendChild(breakDiv);
+		var descDiv = document.createTextNode(book.description.substring(0, 200));
+		bookDiv.appendChild(descDiv);
+		if (book.description.length > 200){
+			var expanderDiv = document.createElement("a");
+			expanderDiv.className = "expander";
+			expanderDiv.addEventListener("click", function(){expandDesc(reznum)});
+			expanderDiv.text = "... Show more";
+			bookDiv.appendChild(expanderDiv);
+		}
+		return bookDiv;
 	}
 
 	function expandDesc(id){
-		document.getElementById("bookInfo" + id).outerHTML = getLongBookEntryHTML(bookList[id], id);
+		document.getElementById("bookInfo" + id).replaceWith(getLongBookEntryNode(bookList[id], id));
 	}
 
 	function collapseDesc(id){
-		document.getElementById("bookInfo" + id).outerHTML = getShortBookEntryHTML(bookList[id], id);
+		document.getElementById("bookInfo" + id).replaceWith(getShortBookEntryNode(bookList[id], id));
 	}
 
 	function getBookList(){
@@ -70,12 +148,12 @@
 						bookList = rez;
 						document.getElementById("bookLoadSpinner").style.display="none";
 						for(book in rez){
-							lst.innerHTML += getShortBookEntryHTML(rez[book], book) + "</br>";
+							lst.appendChild(getShortBookEntryNode(rez[book], book));
 						}
 					} else {
 						bookList = [rez];
 						document.getElementById("bookLoadSpinner").style.display="none";
-						lst.innerHTML += getBookHTML(rez);
+						lst.appendChild(getBookNode(rez));
 					}
 				} else {
 					return false;

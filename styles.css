@@ -36,6 +36,10 @@ body{
     padding:2em;
 }
 
+#content a[href]{
+    color:darkslategrey;
+}
+
 #footer{
     width:100%;
     height:60px;
@@ -133,10 +137,12 @@ body{
 
 .expander{
     color:grey;
+    cursor:pointer;
 }
 
 .collapser{
     color:grey;
+    cursor:pointer;
 }
 
 .DataForm{
@@ -167,6 +173,47 @@ body{
 
 .deleteButton:hover{
     background-color:red;
+}
+
+.SingleEntryContainer{
+    display:flex;
+    flex-direction:column;
+}
+
+.SingleEntryImage{
+    display:block;
+    margin:auto;
+    width:60%;
+    max-width:187px;
+    height:auto;
+}
+
+.SingleEntryData{
+    margin-top:4em;
+    flex:1;
+}
+
+@media only screen and (min-width:768px){
+
+    .SingleEntryContainer{
+        display:flex;
+        flex-direction:row;
+    }
+
+    .SingleEntryImage{
+        margin:auto;
+        margin-top:4em;
+        object-fit:contain;
+        max-width:25%;
+        width:auto;
+        height:auto;
+        vertical-align:top;
+    }
+
+    .SingleEntryData{
+        margin:4em;
+        width:75%
+    }
 }
 
 button, input[type=submit], input[type=button]{
