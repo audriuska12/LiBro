@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="http://localhost/LiBro/styles.css">
-<title>LiBro</title>
+<title>Books</title>
 </head>
 <body>
     <div id="container">
@@ -24,7 +24,6 @@
 	var bookList;
 
 	function getBookNode(book){
-		console.log(book);
 		var container = document.createElement("div");
 		container.className = "SingleEntryContainer";
 		var imgDiv = document.createElement("img");
@@ -37,24 +36,30 @@
 		bookDiv.appendChild(titleDiv);
 		var breakDiv = document.createElement("br");
 		bookDiv.appendChild(breakDiv);
-		var authorDiv = document.createElement("a");
-		authorDiv.text = "Author: " + ((book.authorName != null) ? book.authorName : "N\\A");
-		if (book.authorID != null) authorDiv.href = "http://localhost/LiBro/authors/" + book.authorID;
-		bookDiv.appendChild(authorDiv);
-		breakDiv = document.createElement("br");
-		bookDiv.appendChild(breakDiv);
-		var seriesDiv = document.createElement("a");
-		seriesDiv.text = "Series: " + ((book.seriesName != null) ? book.seriesName : "N\\A");
-		if(book.seriesID != null) seriesDiv.href = "http://localhost/LiBro/series/" + book.seriesID;
-		bookDiv.appendChild(seriesDiv);
-		breakDiv = document.createElement("br");
-		bookDiv.appendChild(breakDiv);
-		var publishedDiv = document.createTextNode(book.published);
+		if(book.authorName != null && book.authorName != "" && book.authorID != null){
+			var authorDiv = document.createElement("a");
+			authorDiv.text = "Author: " + book.authorName;
+			authorDiv.href = "http://localhost/LiBro/authors/" + book.authorID;
+			bookDiv.appendChild(authorDiv);
+			breakDiv = document.createElement("br");
+			bookDiv.appendChild(breakDiv);
+		}
+		if(book.seriesName != null && book.seriesName != "" && book.seriesID != null){
+			var seriesDiv = document.createElement("a");
+			seriesDiv.text = "Series: " + ((book.seriesName != null) ? book.seriesName : "N\\A");
+			if(book.seriesID != null) seriesDiv.href = "http://localhost/LiBro/series/" + book.seriesID;
+			bookDiv.appendChild(seriesDiv);
+			breakDiv = document.createElement("br");
+			bookDiv.appendChild(breakDiv);
+		}
+		var publishedDiv = document.createTextNode("Published: " + book.published);
 		bookDiv.appendChild(publishedDiv);
 		breakDiv = document.createElement("br");
 		bookDiv.appendChild(breakDiv);
-		var descDiv = document.createTextNode(book.description);
-		bookDiv.appendChild(descDiv);
+		if(book.description != null && book.description != ""){
+			var descDiv = document.createTextNode(book.description);
+			bookDiv.appendChild(descDiv);
+		}
 		container.appendChild(bookDiv);
 		return container;
 	}
@@ -68,30 +73,36 @@
 		bookDiv.appendChild(titleDiv);
 		var breakDiv = document.createElement("br");
 		bookDiv.appendChild(breakDiv);
-		var authorDiv = document.createElement("a");
-		authorDiv.text = "Author: " + ((book.authorName != null) ? book.authorName : "N\\A");
-		if (book.authorID != null) authorDiv.href = "http://localhost/LiBro/authors/" + book.authorID;
-		bookDiv.appendChild(authorDiv);
-		breakDiv = document.createElement("br");
-		bookDiv.appendChild(breakDiv);
-		var seriesDiv = document.createElement("a");
-		seriesDiv.text = "Series: " + ((book.seriesName != null) ? book.seriesName : "N\\A");
-		if(book.seriesID != null) seriesDiv.href = "http://localhost/LiBro/series/" + book.seriesID;
-		bookDiv.appendChild(seriesDiv);
-		breakDiv = document.createElement("br");
-		bookDiv.appendChild(breakDiv);
+		if(book.authorName != null && book.authorName != "" && book.authorID != null){
+			var authorDiv = document.createElement("a");
+			authorDiv.text = "Author: " + book.authorName;
+			authorDiv.href = "http://localhost/LiBro/authors/" + book.authorID;
+			bookDiv.appendChild(authorDiv);
+			breakDiv = document.createElement("br");
+			bookDiv.appendChild(breakDiv);
+		}
+		if(book.seriesName != null && book.seriesName != "" && book.seriesID != null){
+			var seriesDiv = document.createElement("a");
+			seriesDiv.text = "Series: " + ((book.seriesName != null) ? book.seriesName : "N\\A");
+			if(book.seriesID != null) seriesDiv.href = "http://localhost/LiBro/series/" + book.seriesID;
+			bookDiv.appendChild(seriesDiv);
+			breakDiv = document.createElement("br");
+			bookDiv.appendChild(breakDiv);
+		}
 		var publishedDiv = document.createTextNode("Published: " + book.published);
 		bookDiv.appendChild(publishedDiv);
 		breakDiv = document.createElement("br");
 		bookDiv.appendChild(breakDiv);
-		var descDiv = document.createTextNode(book.description);
-		bookDiv.appendChild(descDiv);
-		if (book.description.length > 200){
-			var collapserDiv = document.createElement("a");
-			collapserDiv.className = "collapser";
-			collapserDiv.addEventListener("click", function(){collapseDesc(reznum)});
-			collapserDiv.text = " Show less";
-			bookDiv.appendChild(collapserDiv);
+		if(book.description != null && book.description != ""){
+			var descDiv = document.createTextNode(book.description);
+			bookDiv.appendChild(descDiv);
+			if (book.description.length > 200){
+				var collapserDiv = document.createElement("a");
+				collapserDiv.className = "collapser";
+				collapserDiv.addEventListener("click", function(){collapseDesc(reznum)});
+				collapserDiv.text = " Show less";
+				bookDiv.appendChild(collapserDiv);
+			}
 		}
 		return bookDiv;
 	}
@@ -105,26 +116,32 @@
 		bookDiv.appendChild(titleDiv);
 		var breakDiv = document.createElement("br");
 		bookDiv.appendChild(breakDiv);
-		var authorDiv = document.createElement("a");
-		authorDiv.text = "Author: " + ((book.authorName != null) ? book.authorName : "N\\A");
-		if (book.authorID != null) authorDiv.href = "http://localhost/LiBro/authors/" + book.authorID;
-		bookDiv.appendChild(authorDiv);
-		breakDiv = document.createElement("br");
-		bookDiv.appendChild(breakDiv);
-		var seriesDiv = document.createElement("a");
-		seriesDiv.text = "Series: " + ((book.seriesName != null) ? book.seriesName : "N\\A");
-		if(book.seriesID != null) seriesDiv.href = "http://localhost/LiBro/series/" + book.seriesID;
-		bookDiv.appendChild(seriesDiv);
-		breakDiv = document.createElement("br");
-		bookDiv.appendChild(breakDiv);
-		var descDiv = document.createTextNode(book.description.substring(0, 200));
-		bookDiv.appendChild(descDiv);
-		if (book.description.length > 200){
-			var expanderDiv = document.createElement("a");
-			expanderDiv.className = "expander";
-			expanderDiv.addEventListener("click", function(){expandDesc(reznum)});
-			expanderDiv.text = "... Show more";
-			bookDiv.appendChild(expanderDiv);
+		if(book.authorName != null && book.authorName != "" && book.authorID != null){
+			var authorDiv = document.createElement("a");
+			authorDiv.text = "Author: " + book.authorName;
+			authorDiv.href = "http://localhost/LiBro/authors/" + book.authorID;
+			bookDiv.appendChild(authorDiv);
+			breakDiv = document.createElement("br");
+			bookDiv.appendChild(breakDiv);
+		}
+		if(book.seriesName != null && book.seriesName != "" && book.seriesID != null){
+			var seriesDiv = document.createElement("a");
+			seriesDiv.text = "Series: " + ((book.seriesName != null) ? book.seriesName : "N\\A");
+			if(book.seriesID != null) seriesDiv.href = "http://localhost/LiBro/series/" + book.seriesID;
+			bookDiv.appendChild(seriesDiv);
+			breakDiv = document.createElement("br");
+			bookDiv.appendChild(breakDiv);
+		}
+		if(book.description != null && book.description != ""){
+			var descDiv = document.createTextNode((book.description != null) ? (book.description.substring(0, 200)) : (""));
+			bookDiv.appendChild(descDiv);
+			if (book.description.length > 200){
+				var expanderDiv = document.createElement("a");
+				expanderDiv.className = "expander";
+				expanderDiv.addEventListener("click", function(){expandDesc(reznum)});
+				expanderDiv.text = "... Show more";
+				bookDiv.appendChild(expanderDiv);
+			}
 		}
 		return bookDiv;
 	}
@@ -154,6 +171,7 @@
 						bookList = [rez];
 						document.getElementById("bookLoadSpinner").style.display="none";
 						lst.appendChild(getBookNode(rez));
+						document.name = rez.title;
 					}
 				} else {
 					return false;

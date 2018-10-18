@@ -23,33 +23,123 @@
 
 	var authorList;
 
-	function getAuthorHTML(author){
-		var name = author.name;
-		var id = author.id;
-		var bio = (author.bio) ? author.bio : "";
-		return "<div>" + name + ((bio != "") ? ("</br>Biography: " + bio) : "") + "</br><a href=\"http://localhost/LiBro/authors/" + id + "/books\">Books</a></br><a href=\"http://localhost/LiBro/authors/" + id + "/series\">Series</a></div>";
+	function getAuthorNode(author){
+		var container = document.createElement("div");
+		container.className = "SingleEntryContainer";
+		var imgDiv = document.createElement("img");
+		imgDiv.className = "SingleEntryImage";
+		imgDiv.src = "http://localhost/LiBro/images/cover-placeholder.gif";
+		container.appendChild(imgDiv);
+		var authorDiv = document.createElement("div");
+		authorDiv.className = "SingleEntryData";
+		var nameDiv = document.createTextNode(author.name);
+		authorDiv.appendChild(nameDiv);
+		var breakDiv = document.createElement("br");
+		authorDiv.appendChild(breakDiv);
+		if(author.bio != null && author.bio != ""){
+			var bioDiv = document.createTextNode("Biography: " + author.bio);
+			authorDiv.appendChild(bioDiv);
+			breakDiv = document.createElement("br");
+			authorDiv.appendChild(breakDiv);
+		}
+		var seriesDiv = document.createElement("a");
+		seriesDiv.href = "http://localhost/LiBro/authors/" + author.id + "/series";
+		seriesDiv.text = "Series";
+		authorDiv.appendChild(seriesDiv);
+		breakDiv = document.createElement("br");
+		authorDiv.appendChild(breakDiv);
+		var bookDiv = document.createElement("a");
+		bookDiv.href = "http://localhost/LiBro/authors/" + author.id + "/books";
+		bookDiv.text = "Books";
+		authorDiv.appendChild(bookDiv);
+		container.appendChild(authorDiv);
+		return container;
 	}
 
-	function getLongAuthorEntryHTML(author, reznum){
-		var name = author.name;
-		var id = author.id;
-		var bio = (author.bio) ? (author.bio + "<a class=\"collapser\" onclick=\"collapseDesc(" + reznum + ")\"> Show less</a>") : "";
-		return "<div id=\"authorInfo" + reznum + "\"><a href=\"http://localhost/LiBro/authors/" + id +"\">" + name + "</a>" + ((bio != "") ? ("</br>Biography: " + bio) : "") + "</br><a href=\"http://localhost/LiBro/authors/" + id + "/books\">Books</a></br><a href=\"http://localhost/LiBro/authors/" + id + "/series\">Series</a></div>";
+	function getLongAuthorEntryNode(author, reznum){
+		var authorDiv = document.createElement("div");
+		authorDiv.id = "authorInfo" + reznum;
+		var nameDiv = document.createElement("a");
+		nameDiv.href = "http://localhost/LiBro/authors/" + author.id;
+		nameDiv.text = author.name;
+		authorDiv.appendChild(nameDiv);
+		var breakDiv = document.createElement("br");
+		authorDiv.appendChild(breakDiv);
+		if(author.bio != null && author.bio != ""){
+			var bioDiv = document.createTextNode("Bio: " + author.bio);
+			authorDiv.appendChild(bioDiv);
+			if (author.bio.length > 200){
+				var collapserDiv = document.createElement("a");
+				collapserDiv.className = "collapser";
+				collapserDiv.addEventListener("click", function(){collapseDesc(reznum)});
+				collapserDiv.text = " Show less";
+				authorDiv.appendChild(collapserDiv);
+			}
+			breakDiv = document.createElement("br");
+			authorDiv.appendChild(breakDiv);
+		}
+		var seriesDiv = document.createElement("a");
+		seriesDiv.href = "http://localhost/LiBro/authors/" + author.id + "/series";
+		seriesDiv.text = "Series";
+		authorDiv.appendChild(seriesDiv);
+		breakDiv = document.createElement("br");
+		authorDiv.appendChild(breakDiv);
+		var bookDiv = document.createElement("a");
+		bookDiv.href = "http://localhost/LiBro/authors/" + author.id + "/books";
+		bookDiv.text = "Books";
+		authorDiv.appendChild(bookDiv);
+		breakDiv = document.createElement("br");
+		authorDiv.appendChild(breakDiv);
+		breakDiv = document.createElement("br");
+		authorDiv.appendChild(breakDiv);
+		return authorDiv;
 	}
     
-	function getShortAuthorEntryHTML(author, reznum){
-		var name = author.name;
-		var id = author.id;
-		var bio = (author.bio) ? ((author.bio.length <= 200)? author.bio : (author.bio.substring(0,197) + "... <a class=\"expander\" onclick=\"expandDesc(" + reznum + ")\"> Show more</a>")) : "";
-		return "<div id=\"authorInfo" + reznum + "\"><a href=\"http://localhost/LiBro/authors/" + id +"\">" + name + "</a>" + ((bio != "") ? ("</br>Biography: " + bio) : "") + "</br><a href=\"http://localhost/LiBro/authors/" + id + "/books\">Books</a></br><a href=\"http://localhost/LiBro/authors/" + id + "/series\">Series</a></div>";
+	function getShortAuthorEntryNode(author, reznum){
+		var authorDiv = document.createElement("div");
+		authorDiv.id = "authorInfo" + reznum;
+		var nameDiv = document.createElement("a");
+		nameDiv.href = "http://localhost/LiBro/authors/" + author.id;
+		nameDiv.text = author.name;
+		authorDiv.appendChild(nameDiv);
+		var breakDiv = document.createElement("br");
+		authorDiv.appendChild(breakDiv);
+		if(author.bio != null && author.bio != ""){
+			var bioDiv = document.createTextNode("Bio: " + author.bio.substring(0,197));
+			authorDiv.appendChild(bioDiv);
+			if (author.bio.length > 200){
+				var expanderDiv = document.createElement("a");
+				expanderDiv.className = "expander";
+				expanderDiv.addEventListener("click", function(){expandDesc(reznum)});
+				expanderDiv.text = "... Show more";
+				authorDiv.appendChild(expanderDiv);
+			}
+			breakDiv = document.createElement("br");
+			authorDiv.appendChild(breakDiv);
+		}
+		var seriesDiv = document.createElement("a");
+		seriesDiv.href = "http://localhost/LiBro/authors/" + author.id + "/series";
+		seriesDiv.text = "Series";
+		authorDiv.appendChild(seriesDiv);
+		breakDiv = document.createElement("br");
+		authorDiv.appendChild(breakDiv);
+		var bookDiv = document.createElement("a");
+		bookDiv.href = "http://localhost/LiBro/authors/" + author.id + "/books";
+		bookDiv.text = "Books";
+		authorDiv.appendChild(bookDiv);
+		breakDiv = document.createElement("br");
+		authorDiv.appendChild(breakDiv);
+		breakDiv = document.createElement("br");
+		authorDiv.appendChild(breakDiv);
+		return authorDiv;
 	}
 
 	function expandDesc(id){
-		document.getElementById("authorInfo" + id).outerHTML = getLongAuthorEntryHTML(authorList[id], id);
+		document.getElementById("authorInfo" + id).replaceWith(getLongAuthorEntryNode(authorList[id], id));
 	}
 
 	function collapseDesc(id){
-		document.getElementById("authorInfo" + id).outerHTML = getShortAuthorEntryHTML(authorList[id], id);
+		document.getElementById("authorInfo" + id).replaceWith(getShortAuthorEntryNode(authorList[id], id));
 	}
 
 	function getAuthorList(){
@@ -63,12 +153,12 @@
 						authorList = rez;
 						document.getElementById("authorLoadSpinner").style.display="none";
 						for(author in rez){
-							lst.innerHTML += getShortAuthorEntryHTML(rez[author], author) + "</br>";
+							lst.appendChild(getShortAuthorEntryNode(rez[author], author));
 						}
 					} else {
 						authorList = [rez];
 						document.getElementById("authorLoadSpinner").style.display="none";
-						lst.innerHTML += getAuthorHTML(rez, 0);
+						lst.appendChild(getAuthorNode(rez));
 						document.title = rez.name;
 					}
 				} else {

@@ -23,36 +23,130 @@
 
 	var seriesList;
 
-	function getSeriesHTML(series){
-		var id = series.id;
-		var name = series.name;
-		var desc = series.description ? series.description : "";
-		var author = (series.authorName != null) ? series.authorName : "N\\A";
-		return "<div>" + name + "</br>" + ((series.authorID != null) ? ("<a href=\"http://localhost/LiBro/authors/" + series.authorID + "\">") : "") + "Author: " + author + "</a></br>Description:" + desc + "</br><a href=\"http://localhost/LiBro/series/" + id + "/books\">Books</a></div>";
+	function getSeriesNode(series){
+		console.log(series);
+		var container = document.createElement("div");
+		container.className = "SingleEntryContainer";
+		var imgDiv = document.createElement("img");
+		imgDiv.className = "SingleEntryImage";
+		imgDiv.src = "http://localhost/LiBro/images/cover-placeholder.gif";
+		container.appendChild(imgDiv);
+		var seriesDiv = document.createElement("div");
+		seriesDiv.className = "SingleEntryData";
+		var titleDiv = document.createTextNode(series.name);
+		seriesDiv.appendChild(titleDiv);
+		var breakDiv = document.createElement("br");
+		seriesDiv.appendChild(breakDiv);
+		if(series.authorName != null && series.authorName != "" && series.authorID != null){
+			var authorDiv = document.createElement("a");
+			authorDiv.text = "Author: " + (series.authorName);
+			authorDiv.href = "http://localhost/LiBro/authors/" + series.authorID;
+			seriesDiv.appendChild(authorDiv);
+			breakDiv = document.createElement("br");
+			seriesDiv.appendChild(breakDiv);
+		}
+		if(series.description != null && series.description != ""){
+			var descDiv = document.createTextNode(series.description);
+			seriesDiv.appendChild(descDiv);
+			breakDiv = document.createElement("br");
+			seriesDiv.appendChild(breakDiv);
+		}
+		var bookDiv = document.createElement("a");
+		bookDiv.href = "http://localhost/LiBro/series/" + series.id + "/books";
+		bookDiv.text = "Books";
+		seriesDiv.appendChild(bookDiv);
+		container.appendChild(seriesDiv);
+		return container;
 	}
 
-	function getLongSeriesEntryHTML(series, reznum){
-		var id = series.id;
-		var name = series.name;
-		var desc = seroes.description ? (series.description + "<a class=\"collapser\" onclick=\"collapseDesc(" + reznum + ")\"> Show less</a>") : "";
-		var author = (series.authorName != null) ? series.authorName : "N\\A";
-		return "<div id=\"seriesInfo" + reznum + "\"><a href=\"http://localhost/LiBro/series/" + id + "\"\>" + name + "</a></br>" + ((series.authorID != null) ? ("<a href=\"http://localhost/LiBro/authors/" + series.authorID + "\">") : "") + "Author: " + author + "</a></br>Description: " + desc + "</br><a href=\"http://localhost/LiBro/series/" + id + "/books\">Books</a></div>";
+	function getLongSeriesEntryNode(series, reznum){
+		var seriesDiv = document.createElement("div");
+		seriesDiv.id = "seriesInfo" + reznum;
+		var titleDiv = document.createElement("a");
+		titleDiv.href = "http://localhost/LiBro/series/" + series.id;
+		titleDiv.text = series.name;
+		seriesDiv.appendChild(titleDiv);
+		var breakDiv = document.createElement("br");
+		seriesDiv.appendChild(breakDiv);
+		if(series.authorName != null && series.authorName != "" && series.authorID != null){
+			var authorDiv = document.createElement("a");
+			authorDiv.text = "Author: " + (series.authorName);
+			authorDiv.href = "http://localhost/LiBro/authors/" + series.authorID;
+			seriesDiv.appendChild(authorDiv);
+			breakDiv = document.createElement("br");
+			seriesDiv.appendChild(breakDiv);
+		}
+		if(series.description != null && series.description != ""){
+			var descDiv = document.createTextNode(series.description);
+			seriesDiv.appendChild(descDiv);
+			if (series.description.length > 200){
+				var collapserDiv = document.createElement("a");
+				collapserDiv.className = "collapser";
+				collapserDiv.addEventListener("click", function(){collapseDesc(reznum)});
+				collapserDiv.text = " Show less";
+				seriesDiv.appendChild(collapserDiv);
+			}
+			breakDiv = document.createElement("br");
+			seriesDiv.appendChild(breakDiv);
+		}
+		var bookDiv = document.createElement("a");
+		bookDiv.href = "http://localhost/LiBro/series/" + series.id + "/books";
+		bookDiv.text = "Books";
+		seriesDiv.appendChild(bookDiv);
+		breakDiv = document.createElement("br");
+		seriesDiv.appendChild(breakDiv);
+		breakDiv = document.createElement("br");
+		seriesDiv.appendChild(breakDiv);
+		return seriesDiv;
 	}
     
-	function getShortSeriesEntryHTML(series, reznum){
-		var id = series.id;
-		var name = series.name;
-		var desc = series.description ? ((series.description.length <= 200) ? series.description : (series.description.substring(0,197) + "... <a class=\"expander\" onclick=\"expandDesc(" + reznum + ")\"> Show more</a>")) : "";
-		var author = (series.authorName != null) ? series.authorName : "N\\A";
-		return "<div id=\"seriesInfo" + reznum + "\"><a href=\"http://localhost/LiBro/series/" + id + "\"\>" + name + "</a></br>" + ((series.authorID != null) ? ("<a href=\"http://localhost/LiBro/authors/" + series.authorID + "\">") : "") + "Author: " + author + "</a></br>Description: " + desc + "</br><a href=\"http://localhost/LiBro/series/" + id + "/books\">Books</a></div>";
+	function getShortSeriesEntryNode(series, reznum){
+		var seriesDiv = document.createElement("div");
+		seriesDiv.id = "seriesInfo" + reznum;
+		var titleDiv = document.createElement("a");
+		titleDiv.href = "http://localhost/LiBro/series/" + series.id;
+		titleDiv.text = series.name;
+		seriesDiv.appendChild(titleDiv);
+		var breakDiv = document.createElement("br");
+		seriesDiv.appendChild(breakDiv);
+		if(series.authorName != null && series.authorName != "" && series.authorID != null){
+			var authorDiv = document.createElement("a");
+			authorDiv.text = "Author: " + (series.authorName);
+			authorDiv.href = "http://localhost/LiBro/authors/" + series.authorID;
+			seriesDiv.appendChild(authorDiv);
+			breakDiv = document.createElement("br");
+			seriesDiv.appendChild(breakDiv);
+		}
+		if(series.description != null && series.description != ""){
+			var descDiv = document.createTextNode(series.description.substring(0,200));
+			seriesDiv.appendChild(descDiv);
+			if (series.description.length > 200){
+				var expanderDiv = document.createElement("a");
+				expanderDiv.className = "expander";
+				expanderDiv.addEventListener("click", function(){expandDesc(reznum)});
+				expanderDiv.text = "... Show more";
+				seriesDiv.appendChild(expanderDiv);
+			}
+			breakDiv = document.createElement("br");
+			seriesDiv.appendChild(breakDiv);
+		}
+		var bookDiv = document.createElement("a");
+		bookDiv.href = "http://localhost/LiBro/series/" + series.id + "/books";
+		bookDiv.text = "Books";
+		seriesDiv.appendChild(bookDiv);
+		breakDiv = document.createElement("br");
+		seriesDiv.appendChild(breakDiv);
+		breakDiv = document.createElement("br");
+		seriesDiv.appendChild(breakDiv);
+		return seriesDiv;
 	}
 
 	function expandDesc(id){
-		document.getElementById("seriesInfo" + id).outerHTML = getLongSeriesEntryHTML(bookList[id], id);
+		document.getElementById("seriesInfo" + id).replaceWith(getLongSeriesEntryNode(seriesList[id], id));
 	}
 
 	function collapseDesc(id){
-		document.getElementById("seriesInfo" + id).outerHTML = getShortSeriesEntryHTML(bookList[id], id);
+		document.getElementById("seriesInfo" + id).replaceWith(getShortSeriesEntryNode(seriesList[id], id));
 	}
 
 	function getSeriesList(){
@@ -66,12 +160,12 @@
 						seriesList = rez;
 						document.getElementById("seriesLoadSpinner").style.display="none";
 						for(series in rez){
-							lst.innerHTML += getShortSeriesEntryHTML(rez[series], series) + "</br>";
+							lst.appendChild(getShortSeriesEntryNode(rez[series], series));
 						}
 					} else {
 						seriesList = [rez];
 						document.getElementById("seriesLoadSpinner").style.display="none";
-						lst.innerHTML += getSeriesHTML(rez);
+						lst.appendChild(getSeriesNode(rez));
 						document.title = rez.name;
 					}
 				} else if (this.status == 404){
