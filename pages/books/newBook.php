@@ -1,7 +1,8 @@
 <div id="CreateBookDiv" class="DataForm">
-	<button id="NewBookButton" onclick="ToggleNewBookView()" class="DataFormButton">Create New Book</button>
-	<div id="BookDataForm" style="display:none">
-	<form>
+	<button id="NewBookButton" onclick="ShowNewBookForm()" class="DataFormButton">Create New Book</button>
+	<div id="BookDataForm" class="modal">
+	<form class="modal-content">
+		<span class="close" onclick="HideNewBookForm()">&times;</span>
 		<div>Title:</div>
 		<div><input id="newBookTitle" type="text"/></div>
 		<div>Author:</div>
@@ -84,13 +85,14 @@
 		xmlhttp.send();
 	}
 
-	function ToggleNewBookView(){
+	function ShowNewBookForm(){
 		var l = document.getElementById("BookDataForm");
-		if(l.style.display=="none"){
-			l.style.display="block";
-		} else {
-			l.style.display="none";
-		}	
+		l.style.display="block";
+	}
+
+	function HideNewBookForm(){
+		var l = document.getElementById("BookDataForm");
+		l.style.display="none";
 	}
 
 	function submitBook(){
@@ -119,5 +121,11 @@
 
 	getAuthorList();
 	getSeriesList();
+	window.onclick = function(event) {
+		var modal = document.getElementById("BookDataForm");
+	    if (event.target == modal) {
+	        modal.style.display = "none";
+	    }
+	} 
 	
 </script>

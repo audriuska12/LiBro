@@ -1,7 +1,8 @@
 <div id="EditSeriesDiv" class="DataForm">
-	<button id="EditSeriesButton" onclick="ToggleEditSeriesView()" class="DataFormButton">Edit Series</button>
-	<div id="SeriesDataForm" style="display:none">
-	<form>
+	<button id="EditSeriesButton" onclick="ShowEditSeriesForm()" class="DataFormButton">Edit Series</button>
+	<div id="SeriesDataForm" class="modal">
+	<form class="modal-content">
+		<span class="close" onclick="HideNewSeriesForm()">&times;</span>
 		<div>Name:</div>
 		<div><input id="editSeriesName" type="text"/></div>
 		<div>Author:</div>
@@ -48,14 +49,15 @@
 		xmlhttp.send();
 	}
 
-	function ToggleEditSeriesView(){
+	function ShowEditSeriesForm(){
+		loadSeries();
 		var l = document.getElementById("SeriesDataForm");
-		if(l.style.display=="none"){
-			loadSeries();
-			l.style.display="block";
-		} else {
-			l.style.display="none";
-		}	
+		l.style.display="block";
+	}
+
+	function HideEditeriesForm(){
+		var l = document.getElementById("SeriesDataForm");
+		l.style.display="none";
 	}
 
 	function submitSeriesEdit(){
@@ -106,5 +108,11 @@
 	}
 	
 	getAuthorList();
+	window.onclick = function(event) {
+		var modal = document.getElementById("SeriesDataForm");
+	    if (event.target == modal) {
+	        modal.style.display = "none";
+	    }
+	} 
 	
 </script>

@@ -1,7 +1,8 @@
 <div id="EditAuthorDiv" class="DataForm">
-	<button id="EditAuthorButton" onclick="ToggleEditAuthorView()" class="DataFormButton">Edit Author</button>
-	<div id="AuthorDataForm" style="display:none">
-	<form>
+	<button id="EditAuthorButton" onclick="ShowEditAuthorForm()" class="DataFormButton">Edit Author</button>
+	<div id="AuthorDataForm" class="modal">
+	<form class="modal-content">
+		<span class="close" onclick="HideEditAuthorForm()">&times;</span>
 		<div>Name:</div>
 		<div><input id="editAuthorName" type="text"/></div>
 		<div>Biography:</div>
@@ -13,14 +14,15 @@
 
 <script type="text/javascript">
 
-	function ToggleEditAuthorView(){
+	function ShowEditAuthorForm(){
+		loadAuthor();
 		var l = document.getElementById("AuthorDataForm");
-		if(l.style.display=="none"){
-			loadAuthor();
-			l.style.display="block";
-		} else {
-			l.style.display="none";
-		}	
+		l.style.display="block";
+	}
+
+	function HideEditAuthorForm(){
+		var l = document.getElementById("AuthorDataForm");
+		l.style.display="none";
 	}
 
 	function submitAuthorEdit(){
@@ -64,5 +66,12 @@
 		xmlhttp.open("GET", "http://localhost/LiBro/api/authors/<?php echo $_GET['id']?>", true);
 		xmlhttp.send();
 	}
+
+	window.onclick = function(event) {
+		var modal = document.getElementById("AuthorDataForm");
+	    if (event.target == modal) {
+	        modal.style.display = "none";
+	    }
+	} 
 	
 </script>

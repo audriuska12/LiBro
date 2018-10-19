@@ -1,7 +1,8 @@
 <div id="CreateSeriesDiv" class="DataForm">
-	<button id="NewSeriesButton" onclick="ToggleNewSeriesView()" class="DataFormButton">Create New Series</button>
-	<div id="SeriesDataForm" style="display:none">
-	<form>
+	<button id="NewSeriesButton" onclick="ShowNewSeriesForm()" class="DataFormButton">Create New Series</button>
+	<div id="SeriesDataForm" class="modal">
+	<form class="modal-content">
+		<span class="close" onclick="HideNewSeriesForm()">&times;</span>
 		<div>Name:</div>
 		<div><input id="newSeriesName" type="text"/></div>
 		<div>Author:</div>
@@ -48,13 +49,14 @@
 		xmlhttp.send();
 	}
 
-	function ToggleNewSeriesView(){
+	function ShowNewSeriesForm(){
 		var l = document.getElementById("SeriesDataForm");
-		if(l.style.display=="none"){
-			l.style.display="block";
-		} else {
-			l.style.display="none";
-		}	
+		l.style.display="block";
+	}
+
+	function HideNewSeriesForm(){
+		var l = document.getElementById("SeriesDataForm");
+		l.style.display="none";
 	}
 
 	function submitSeries(){
@@ -80,5 +82,11 @@
 	}
 
 	getAuthorList();
+	window.onclick = function(event) {
+		var modal = document.getElementById("SeriesDataForm");
+	    if (event.target == modal) {
+	        modal.style.display = "none";
+	    }
+	} 
 	
 </script>

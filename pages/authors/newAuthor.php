@@ -1,7 +1,8 @@
 <div id="CreateAuthorDiv" class="DataForm">
-	<button id="NewAuthorButton" onclick="ToggleNewAuthorView()" class="DataFormButton">Create New Author</button>
-	<div id="AuthorDataForm" style="display:none">
-	<form>
+	<button id="NewAuthorButton" onclick="ShowNewAuthorForm()" class="DataFormButton">Create New Author</button>
+	<div id="AuthorDataForm" class="modal">
+	<form class="modal-content">
+		<span class="close" onclick="HideNewAuthorForm()">&times;</span>
 		<div>Name:</div>
 		<div><input id="newAuthorName" type="text"/></div>
 		<div>Biography:</div>
@@ -13,13 +14,14 @@
 
 <script type="text/javascript">
 
-	function ToggleNewAuthorView(){
+	function ShowNewAuthorForm(){
 		var l = document.getElementById("AuthorDataForm");
-		if(l.style.display=="none"){
-			l.style.display="block";
-		} else {
-			l.style.display="none";
-		}	
+		l.style.display="block";
+	}
+
+	function HideNewAuthorForm(){
+		var l = document.getElementById("AuthorDataForm");
+		l.style.display="none";
 	}
 
 	function submitAuthor(){
@@ -43,5 +45,12 @@
 		xmlhttp.send("name=" + name + ((bio != "") ? ("&bio=" + bio) : ""));
 		return false;
 	}
+
+	window.onclick = function(event) {
+		var modal = document.getElementById("AuthorDataForm");
+	    if (event.target == modal) {
+	        modal.style.display = "none";
+	    }
+	} 
 	
 </script>
