@@ -99,7 +99,7 @@ if ($access) {
                         }
                     }
                 }
-                if (! isset($_POST['name'])) {
+                if (! isset($_POST['name']) || empty($_POST['name'])) {
                     http_response_code(400);
                     die();
                 } else {
@@ -160,7 +160,7 @@ if ($access) {
                     die();
                 }
                 $json = json_decode(file_get_contents("php://input"), true);
-                if (! isset($json['name'])) {
+                if (! isset($json['name']) || empty($json['name'])) {
                     http_response_code(400);
                     die();
                 } else {

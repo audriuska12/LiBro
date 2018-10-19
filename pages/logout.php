@@ -9,6 +9,8 @@
 			if(this.readyState == 4){
 				if(this.status == 200){
 					localStorage.setItem("AuthToken", this.responseText);
+				} else  if(this.status == 403){
+					logout();
 				} else {
 					return false;
 				}

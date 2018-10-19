@@ -2,7 +2,7 @@
 	<button id="EditSeriesButton" onclick="ShowEditSeriesForm()" class="DataFormButton">Edit Series</button>
 	<div id="SeriesDataForm" class="modal">
 	<form class="modal-content">
-		<span class="close" onclick="HideNewSeriesForm()">&times;</span>
+		<span class="close" onclick="HideEditSeriesForm()">&times;</span>
 		<div>Name:</div>
 		<div><input id="editSeriesName" type="text"/></div>
 		<div>Author:</div>
