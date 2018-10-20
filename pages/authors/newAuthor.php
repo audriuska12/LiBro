@@ -5,6 +5,7 @@
 		<span class="close" onclick="HideNewAuthorForm()">&times;</span>
 		<div>Name:</div>
 		<div><input id="newAuthorName" type="text"/></div>
+		<div id="errorDiv" class="error" style="display:none">Must not be empty</div>
 		<div>Biography:</div>
 		<div><textarea id="newAuthorBio" cols="60"></textarea></div>		
 		<div><input id="newAuthorSubmit" type="button" value="Submit" onclick="submitAuthor()"/></div>
@@ -26,6 +27,10 @@
 
 	function submitAuthor(){
 		var name = document.getElementById("newAuthorName").value;
+		if(name == ""){
+			document.getElementById("errorDiv").style.display="block";
+			return false;
+		}
 		var bio = document.getElementById("newAuthorBio").value;
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function(){

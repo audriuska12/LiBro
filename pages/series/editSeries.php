@@ -5,6 +5,7 @@
 		<span class="close" onclick="HideEditSeriesForm()">&times;</span>
 		<div>Name:</div>
 		<div><input id="editSeriesName" type="text"/></div>
+		<div id="errorDiv" class="error" style="display:none">Must not be empty</div>
 		<div>Author:</div>
 		<div><select id="editSeriesAuthor"><option value="0" selected>N/A</option></select></div>
 		<div>Description:</div>
@@ -62,6 +63,10 @@
 
 	function submitSeriesEdit(){
 		var seriesName = document.getElementById("editSeriesName").value;
+		if(seriesName == ""){
+			document.getElementById("errorDiv").style.display="block";
+			return false;
+		}
 		var seriesDescription = document.getElementById("editSeriesDescription").value;
 		var seriesAuthor = document.getElementById("editSeriesAuthor").value;
 		var series = {};

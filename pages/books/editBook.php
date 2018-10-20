@@ -5,12 +5,13 @@
 		<span class="close" onclick="HideEditBookForm()">&times;</span>
 		<div>Title:</div>
 		<div><input id="editBookTitle" type="text"/></div>
+		<div id="errorDiv" class="error" style="display:none">Must not be empty</div>
 		<div>Author:</div>
 		<div><select id="editBookAuthor"><option value="0" selected>N/A</option></select></div>
 		<div>Series:</div>
 		<div><select id="editBookSeries"><option value="0" selected>N/A</option></select></div>
 		<div>Published on:</div>
-		<div><input id="editBookPublished" type="date" required/></div>
+		<div><input id="editBookPublished" type="date"/></div>
 		<div>Description:</div>
 		<div><textarea id="editBookDescription" cols="60"></textarea></div>
 		<div><input id="editBookSubmit" type="button" value="Submit" onclick="submitBookEdit()"/></div>
@@ -98,6 +99,10 @@
 
 	function submitBookEdit(){
 		var bookTitle = document.getElementById("editBookTitle").value;
+		if(bookTitle == ""){
+			document.getElementById("errorDiv").style.display="block";
+			return false;
+		}
 		var bookDescription = document.getElementById("editBookDescription").value;
 		var bookPublished = document.getElementById("editBookPublished").value;
 		var bookAuthor = document.getElementById("editBookAuthor").value;
@@ -139,7 +144,7 @@
 					var rez = JSON.parse(this.responseText);
 					document.getElementById("editBookTitle").value = rez.title;
 					document.getElementById("editBookDescription").value = rez.description;
-					document.getElementById("editBookPublished").value = rez.published;
+					if(rez.published != null) document.getElementById("editBookPublished").value = rez.published;
 					document.getElementById("editBookAuthor").value = (rez.authorID != null) ? (rez.authorID) : (0);
 					document.getElementById("editBookSeries").value = (rez.seriesID != null) ? (rez.seriesID) : (0);
 					}

@@ -5,6 +5,7 @@
 		<span class="close" onclick="HideNewBookForm()">&times;</span>
 		<div>Title:</div>
 		<div><input id="newBookTitle" type="text"/></div>
+		<div id="errorDiv" class="error" style="display:none">Must not be empty</div>
 		<div>Author:</div>
 		<div><select id="newBookAuthor"><option value="0" selected>N/A</option></select></div>
 		<div>Series:</div>
@@ -97,6 +98,10 @@
 
 	function submitBook(){
 		var title = document.getElementById("newBookTitle").value;
+		if(title == ""){
+			document.getElementById("errorDiv").style.display="block";
+			return false;
+		}
 		var description = document.getElementById("newBookDescription").value;
 		var published = document.getElementById("newBookPublished").value;
 		var author = document.getElementById("newBookAuthor").value;

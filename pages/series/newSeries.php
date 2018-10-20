@@ -5,6 +5,7 @@
 		<span class="close" onclick="HideNewSeriesForm()">&times;</span>
 		<div>Name:</div>
 		<div><input id="newSeriesName" type="text"/></div>
+		<div id="errorDiv" class="error" style="display:none">Must not be empty</div>
 		<div>Author:</div>
 		<div><select id="newSeriesAuthor"><option value="0" selected>N/A</option></select></div>
 		<div>Description:</div>
@@ -61,6 +62,10 @@
 
 	function submitSeries(){
 		var name = document.getElementById("newSeriesName").value;
+		if(name == ""){
+			document.getElementById("errorDiv").style.display="block";
+			return false;
+		}
 		var description = document.getElementById("newSeriesDescription").value;
 		var author = document.getElementById("newSeriesAuthor").value;
 		var xmlhttp = new XMLHttpRequest();
