@@ -48,6 +48,28 @@ body{
     color:#e5fcf5
 }
 
+#footer-content{
+    width:250px;
+    height:auto;
+    margin:auto;
+}
+
+#footer-img{
+    display:inline-block;
+    height:auto;
+    width:auto;
+    margin:auto;
+    margin-top:1em;
+}
+
+#footer-links{
+    display:inline-block;
+    width:auto;
+    vertical-align: top;
+    margin-top: 1em;
+    margin-left:1em;
+}
+
 #HomeDiv{
     float:left;
     font-size:3em;
